@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Mascota mascota = ViewData["MASCOTA"] as Mascota;
+}
+<h1 style="color:blue">Session mascota Bytes[]</h1>
+
+<p>
+    <a class="btn btn-danger" asp-controller="EjemploSession" asp-action="SessionMascotaBytes" asp-route-accion="almacenar">Almacenar</a>
+</p>
+<p>
+    <a class="btn btn-success" asp-controller="EjemploSession" asp-action="SessionMascotaBytes" asp-route-accion="mostrar">Mostrar</a>
+</p>
+
+<h3 style="color:rebeccapurple">@ViewData["MENSJAE"]</h3>
+
+@if(mascota != null)
+{
+    <ul class="list-group">
+        <li class="list-group-item">
+            Nombre: @mascota.Nombre
+        </li>
+        <li class="list-group-item">
+            Raza: @mascota.Raza
+        </li>
+        <li class="list-group-item">
+            Edad: @mascota.Edad
+        </li>
+    </ul>  
+}

@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Ejemplos Session</h1>
+
+<h2 style="color:rebeccapurple">
+    @Context.Session.GetString("nombre")
+</h2>
+
+<h2 style="color:rebeccapurple">
+    @Context.Session.GetString("hora")
+</h2>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <a asp-controller="EjemploSession" asp-action="SessionSimple">SessionSimple</a>
+    <li class="list-group-item">
+        <a asp-controller="EjemploSession" asp-action="SessionMascotaBytes">Session mascota</a>
+    </li>
+    </li>
+</ul>
