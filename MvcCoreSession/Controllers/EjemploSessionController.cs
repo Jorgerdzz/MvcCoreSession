@@ -8,6 +8,12 @@ namespace MvcCoreSession.Controllers
     {
         public IActionResult Index()
         {
+            byte[] data = HttpContext.Session.Get("MASCOTA");
+            if (data != null)
+            {
+                Mascota mascota = (Mascota)HelperBinarySession.ByteToObject(data);
+                return View(mascota);
+            }
             return View();
         }
 

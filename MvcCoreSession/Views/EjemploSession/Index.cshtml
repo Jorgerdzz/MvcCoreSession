@@ -3,6 +3,8 @@
 *@
 @{
 }
+@model Mascota
+
 <h1>Ejemplos Session</h1>
 
 <h2 style="color:rebeccapurple">
@@ -12,6 +14,13 @@
 <h2 style="color:rebeccapurple">
     @Context.Session.GetString("hora")
 </h2>
+
+@if(Model != null)
+{
+    <h2 style="color:rebeccapurple">
+        Mascota: @Model.Nombre, @Model.Raza, @Model.Edad
+    </h2>   
+}
 
 <ul class="list-group">
     <li class="list-group-item">
