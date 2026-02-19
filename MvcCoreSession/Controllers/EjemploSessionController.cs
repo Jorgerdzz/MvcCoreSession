@@ -143,5 +143,30 @@ namespace MvcCoreSession.Controllers
             return View();
         }
 
+        public IActionResult SessionMascotasCollectionGeneric(string accion)
+        {
+            if (accion != null)
+            {
+                if (accion.ToLower() == "almacenar")
+                {
+                    List<Mascota> lista = new List<Mascota>
+                    {
+                        new Mascota{Nombre= "Nala", Raza="Leona", Edad=12},
+                        new Mascota{Nombre= "Sebastian", Raza="Cangrejo", Edad=17},
+                        new Mascota{Nombre= "Rafiki", Raza="Brujo", Edad=33},
+                        new Mascota{Nombre= "Olaf", Raza="Muñeco", Edad=22},
+                    };
+                    HttpContext.Session.SetObject("LISTAMASCOTAS", lista);
+                    ViewData["MENSAJE"] = "Lista mascotas almacenada en Session";
+                }
+                else if (accion.ToLower() == "mostrar")
+                {
+                    List<Mascota> lista = HttpContext.Session.GetObject<List<Mascota>>("LISTAMASCOTAS");
+                    ViewData["MASCOTAS"] = lista;
+                }
+            }
+            return View();
+        }
+
     }
 }
