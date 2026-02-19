@@ -29,6 +29,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="EjemploSession" asp-action="Index">Session</a>
                         </li>
+                        <li class="nav-item">
+                            @{
+                                int num = 0;
+                                List<Mascota> mascotas = 
+                                Context.Session.GetObject<List<Mascota>>("LISTAMASCOTAS");
+                                if(mascotas != null)
+                                {
+                                    num = mascotas.Count;
+                                }
+                            }
+                            <span style="color:red">Mascotas almacenadas: @num</span>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -8,18 +8,17 @@ namespace MvcCoreSession.Controllers
 {
     public class EjemploSessionController : Controller
     {
+        HelperSessionContextAccessor helper;
+
+        public EjemploSessionController(HelperSessionContextAccessor helper)
+        {
+            this.helper = helper;
+        }
+
         public IActionResult Index()
         {
-            byte[] data = HttpContext.Session.Get("MASCOTA");
-            if (data != null)
-            {
-                Mascota mascota = (Mascota)HelperBinarySession.ByteToObject(data);
-                return View(mascota);
-            }
-            else
-            {
-                return View();
-            }
+            List<Mascota> mascotas = this.helper.GetMascotasSession();
+            return View(mascotas);
         }
 
         public IActionResult SessionSimple(string accion)

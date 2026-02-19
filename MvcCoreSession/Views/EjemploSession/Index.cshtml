@@ -4,7 +4,7 @@
 @{
 }
 
-@* @model Mascota *@
+@model List<Mascota>
 
 <h1>Ejemplos Session</h1>
 
@@ -73,3 +73,28 @@
         <a asp-controller="EjemploSession" asp-action="SessionMascotasCollectionGeneric">Lista Mascotas Genericos</a>
     </li>
 </ul>
+
+
+@if(Model != null)
+{
+    <table class="table table-info table-bordered">
+        <thead>
+            <tr>
+                <th>NOMBRE</th>
+                <th>RAZA</th>
+                <th>EDAD</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Mascota mascot in Model)
+            {
+                <tr>
+                    <td>@mascot.Nombre</td>
+                    <td>@mascot.Raza</td>
+                    <td>@mascot.Edad</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
