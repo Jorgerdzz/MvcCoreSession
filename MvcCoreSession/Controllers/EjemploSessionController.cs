@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MvcCoreSession.Extensions;
 using MvcCoreSession.Helpers;
 using MvcCoreSession.Models;
 using System;
@@ -114,6 +115,28 @@ namespace MvcCoreSession.Controllers
                 {
                     string jsonMascota = HttpContext.Session.GetString("MASCOTAJSON");
                     Mascota mascota = HelperJsonSession.DeserializeObject<Mascota>(jsonMascota);
+                    ViewData["MASCOTA"] = mascota;
+                }
+            }
+            return View();
+        }
+
+        public IActionResult SessionMascotaGenericos(string accion)
+        {
+            if (accion != null)
+            {
+                if (accion.ToLower() == "almacenar")
+                {
+                    Mascota mascota = new Mascota();
+                    mascota.Nombre = "Fujur";
+                    mascota.Raza = "Dragon";
+                    mascota.Edad = 25;
+                    HttpContext.Session.SetObject("MASCOTAGENERICA", mascota);  
+                    ViewData["MENSAJE"] = "Mascota almacenada en Session";
+                }
+                else if (accion.ToLower() == "mostrar")
+                {
+                    Mascota mascota = HttpContext.Session.GetObject<Mascota>("MASCOTAGENERICA");
                     ViewData["MASCOTA"] = mascota;
                 }
             }

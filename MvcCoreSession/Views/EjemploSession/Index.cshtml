@@ -3,8 +3,8 @@
 *@
 @{
 }
-@* @using MvcCoreSession.Helpers *@
-@model Mascota
+
+@* @model Mascota *@
 
 <h1>Ejemplos Session</h1>
 
@@ -16,12 +16,18 @@
     @Context.Session.GetString("hora")
 </h2>
 
-@if(Model != null)
+@{
+    Mascota mascota = Context.Session.GetObject<Mascota>("MASCOTAGENERICA");
+}
+
+@if(mascota != null)
 {
     <h2 style="color:rebeccapurple">
-        Mascota: @Model.Nombre, @Model.Raza, @Model.Edad
+        Mascota: @mascota.Nombre, @mascota.Raza, @mascota.Edad
     </h2>   
+    
 }
+
 
 <ul class="list-group">
     <li class="list-group-item">
@@ -35,5 +41,8 @@
     </li>
     <li class="list-group-item">
         <a asp-controller="EjemploSession" asp-action="SessionMascotaJson">Mascota JSON</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="EjemploSession" asp-action="SessionMascotaGenericos">Mascota Genericos</a>
     </li>
 </ul>
