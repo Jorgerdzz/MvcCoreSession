@@ -3,6 +3,7 @@
 *@
 @{
 }
+@* @using MvcCoreSession.Helpers *@
 @model Mascota
 
 <h1>Ejemplos Session</h1>
@@ -31,5 +32,8 @@
     </li>
     <li class="list-group-item">
         <a asp-controller="EjemploSession" asp-action="SessionMascotaCollectionBytes">Session List mascotas</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="EjemploSession" asp-action="SessionMascotaJson">Mascota JSON</a>
     </li>
 </ul>

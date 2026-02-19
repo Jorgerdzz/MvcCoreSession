@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MvcCoreSession.Helpers;
 using MvcCoreSession.Models;
+using System;
 
 namespace MvcCoreSession.Controllers
 {
@@ -14,7 +15,10 @@ namespace MvcCoreSession.Controllers
                 Mascota mascota = (Mascota)HelperBinarySession.ByteToObject(data);
                 return View(mascota);
             }
-            return View();
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult SessionSimple(string accion)
@@ -89,5 +93,32 @@ namespace MvcCoreSession.Controllers
             }
             return View();
         }
+
+
+        public IActionResult SessionMascotaJson(string accion)
+        {
+            if (accion != null)
+            {
+                if (accion.ToLower() == "almacenar")
+                {
+                    Mascota mascota = new Mascota();
+                    mascota.Nombre = "Dora";
+                    mascota.Raza = "Exploradora";
+                    mascota.Edad = 18;
+                    //QUEREMOS GUARDAR EL OBJETO MASCOTA COMO STRING EN SESSION
+                    string mascotaJson = HelperJsonSession.SerializeObject<Mascota>(mascota);
+                    HttpContext.Session.SetString("MASCOTAJSON", mascotaJson);
+                    ViewData["MENSAJE"] = "Mascota almacenada en Session";
+                }
+                else if (accion.ToLower() == "mostrar")
+                {
+                    string jsonMascota = HttpContext.Session.GetString("MASCOTAJSON");
+                    Mascota mascota = HelperJsonSession.DeserializeObject<Mascota>(jsonMascota);
+                    ViewData["MASCOTA"] = mascota;
+                }
+            }
+            return View();
+        }
+
     }
 }
